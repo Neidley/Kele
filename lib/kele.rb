@@ -23,4 +23,10 @@ class Kele
     JSON.parse(response.body)
   end
 
+  def get_messages
+    base_url = 'https://www.bloc.io/avi/v1'
+    response = self.class.get("#{base_url}/message_threads", headers: { "authorization" => @auth_token } )
+    JSON.parse(response.body)
+  end
+
 end
