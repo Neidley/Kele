@@ -23,10 +23,22 @@ class Kele
     JSON.parse(response.body)
   end
 
-  def get_messages
-    base_url = 'https://www.bloc.io/avi/v1'
-    response = self.class.get("#{base_url}/message_threads", headers: { "authorization" => @auth_token } )
+  def get_messages(page = nil)
+    base_url = 'https://www.bloc.io/api/v1'
+    if page == nil
+      response = self.class.get("#{base_url}/message_threads", headers: { "authorization" => @auth_token } )
+    else
+      response = self.class.get("#{base_url}/message_threads/?page=#{page}", headers: { "authorization" => @auth_token } )
+    end
     JSON.parse(response.body)
+  end
+
+  def create_message(msg)
+    sender = 'neidz44@gmail.com'
+    recipientid = 946
+    base_url = 'https://www.bloc.io/api/v1'
+    response = self.class.post("#{base_url}/messages", body: {sender: sender, recipient_id: recipientid, subject: 'Yo! Sending thing from Kele', 'stripped-text': msg }, headers: { "authorization" => @auth_token } )
+    puts 'successfully sent! Message: ' + msg
   end
 
 end
