@@ -41,4 +41,14 @@ class Kele
     puts 'successfully sent! Message: ' + msg
   end
 
+  def checkpoint_submission(comment)
+    enrollment_id = 5933
+    checkpoint_id = 1905
+    assignment_branch = 'checkpoint-6-messaging'
+    assignment_commit_link = 'https://github.com/Neidley/Kele/tree/checkpoint-6-messaging'
+    base_url = 'https://www.bloc.io/api/v1'
+    response = self.class.post("#{base_url}/checkpoint_submissions", body: {assignment_branch: assignment_branch, assignment_commit_link: assignment_commit_link, checkpoint_id: checkpoint_id, enrollment_id: enrollment_id, comment: comment}, headers: { "authorization" => @auth_token } )
+    puts 'successfully submitted checkpoint! Comment: ' + comment
+  end
+
 end
